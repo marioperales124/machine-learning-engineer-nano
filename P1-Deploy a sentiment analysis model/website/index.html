@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Sentiment Analysis Web App</title>
+        <meta charset="utf-8">
+        <meta name="viewport"  content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=UOuIOZlP-VfVg5xjoFiJ0sJCqxwwPoJ0QxQ9QJkjTv-MXHNtSAOLRbUMWQk6NzjLGp_VBQej14l3R5z65kL6yHbYzsh6Hf0-04d83d6pgB7vHMrLanYnmEq_u5O1GFbfJ_8XUL_Ym_q-1rSxm-urEuxOY_KKp592bmiS4b42TmFvns5aymUC74fCP6Y4zaov" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9teXByb3llY3Rub3RlYm9vay5ub3RlYm9vay51cy1lYXN0LTEuc2FnZW1ha2VyLmF3cy9maWxlcy9zYWdlbWFrZXItZGVwbG95bWVudC9Qcm9qZWN0L3dlYnNpdGUvaW5kZXguaHRtbD9kb3dubG9hZD0x"/><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script>
+         "use strict";
+         function submitForm(oFormElement) {
+             var xhr = new XMLHttpRequest();
+             xhr.onload = function() {
+                 var result = parseFloat(xhr.responseText);
+                 var resultElement = document.getElementById('result');
+                 if (result == 0) {
+                     resultElement.className = 'bg-danger';
+                     resultElement.innerHTML = 'Your review was NEGATIVE!';
+                 } else {
+                     resultElement.className = 'bg-success';
+                     resultElement.innerHTML = 'Your review was POSITIVE!';
+                 }
+             }
+             xhr.open (oFormElement.method, oFormElement.action, true);
+             var review = document.getElementById('review');
+             xhr.send (review.value);
+             return false;
+         }
+        </script>
+
+    </head>
+    <body>
+
+        <div class="container">
+            <h1>Is your review positive, or negative?</h1>
+            <p>Enter your review below and click submit to find out...</p>
+            <form method="POST"
+                  action="https://hobw91iiqe.execute-api.us-east-1.amazonaws.com/prod"
+                  onsubmit="return submitForm(this);" >
+                <div class="form-group">
+                    <label for="review">Review:</label>
+                    <textarea class="form-control"  rows="5" id="review">Please write your review here.</textarea>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            <h1 class="bg-success" id="result"></h1>
+        </div>
+    </body>
+</html>
